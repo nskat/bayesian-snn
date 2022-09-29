@@ -80,7 +80,6 @@ if __name__ == '__main__':
     net = Network(input_shape=input_shape,
                   hidden_shape=[1024, 512, 256],
                   output_shape=10,
-                  scale_grad=args.scale_grad,
                   thr=args.thr,
                   burn_in=args.burn_in,
                   thr_scaling=args.binary).to(device)

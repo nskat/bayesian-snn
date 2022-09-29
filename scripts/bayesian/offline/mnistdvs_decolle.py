@@ -77,7 +77,6 @@ if __name__ == '__main__':
 
     dataset_path = args.home + r"/datasets/mnist-dvs/mnist_dvs_events_new.hdf5"
     for ite in range(args.num_ite):
-        tasks_seen = []
         accs_mode = []
         accs_ens = []
         accs_comm = []
@@ -124,13 +123,13 @@ if __name__ == '__main__':
                     = test_bayesian(net, test_dl,
                                     args.num_samples_test,
                                     optimizer, device)
-                print('Mode acc at epoch %d for current task: %f'
+                print('Mode acc at epoch %d: %f'
                       % (epoch + 1, test_acc_mode))
 
-                print('ensemble acc at epoch %d for current task: %f' % (
+                print('ensemble acc at epoch %d: %f' % (
                     epoch + 1, test_acc_ens))
 
-                print('committee acc at epoch %d for current task: %f' % (
+                print('committee acc at epoch %d: %f' % (
                     epoch + 1, test_acc_comm))
 
                 test_ece_ens = compute_ece(test_preds_ens, 20,
