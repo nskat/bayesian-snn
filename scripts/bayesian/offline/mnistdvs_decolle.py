@@ -116,7 +116,6 @@ if __name__ == '__main__':
             loss = train_epoch_bayesian(net, loss_fn,
                                         optimizer, train_iterator,
                                         device, args.binary)
-            torch.cuda.empty_cache()
 
             if (epoch + 1) % args.test_period == 0:
                 # Get mode/ensemble/committee test acc on the current task
