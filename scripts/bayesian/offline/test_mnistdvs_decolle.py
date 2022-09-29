@@ -91,7 +91,7 @@ if __name__ == '__main__':
                               binary_synapses=args.binary)
     results_path = args.home + args.weights_path
 
-    for param in optimizer.param_groups['latent']:
+    for param in optimizer.param_groups[0]['latent']:
         param[:] = 0
     optimizer.load_state_dict(torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt')))
 
