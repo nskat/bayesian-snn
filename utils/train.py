@@ -2,6 +2,7 @@ import tqdm
 import optim.SampleGradEngine as SampleGradEngine
 import torch
 
+
 def train_epoch_bayesian(network, loss_fn, optimizer, train_iter, device,
                          binary, reduction='mean'):
     network.train()
@@ -23,9 +24,16 @@ def train_epoch_bayesian(network, loss_fn, optimizer, train_iter, device,
                                                     loss_type=reduction)
             optimizer.step()
             optimizer.zero_grad()
+
+            del loss
+            del spikes
+            del readouts
+            del voltages
+
             if not binary:
                 SampleGradEngine.clear_backprops(network)
                 SampleGradEngine.zero_sample_grad(network)
+
         torch.cuda.empty_cache()
 
     return loss
