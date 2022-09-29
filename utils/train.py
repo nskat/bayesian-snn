@@ -36,7 +36,7 @@ def train_epoch_bayesian(network, loss_fn, optimizer, train_iter, device,
 
         torch.cuda.empty_cache()
 
-    return loss
+    return
 
 
 def train_epoch_frequentist(network, loss_fn, optimizer, train_iter, device):

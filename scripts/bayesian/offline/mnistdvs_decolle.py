@@ -112,9 +112,9 @@ if __name__ == '__main__':
             print('Epoch %d / %d' % (epoch + 1, args.num_epochs))
 
             train_iterator = iter(train_dl)
-            loss = train_epoch_bayesian(net, loss_fn,
-                                        optimizer, train_iterator,
-                                        device, args.binary)
+            train_epoch_bayesian(net, loss_fn,
+                                 optimizer, train_iterator,
+                                 device, args.binary)
 
             if (epoch + 1) % args.test_period == 0:
                 # Get mode/ensemble/committee test acc on the current task
