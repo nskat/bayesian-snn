@@ -34,6 +34,7 @@ def train_epoch_bayesian(network, loss_fn, optimizer, train_iter, device,
                 SampleGradEngine.clear_backprops(network)
                 SampleGradEngine.zero_sample_grad(network)
 
+        del inputs
         torch.cuda.empty_cache()
 
     return
