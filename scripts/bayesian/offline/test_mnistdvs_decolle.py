@@ -91,12 +91,13 @@ if __name__ == '__main__':
                               binary_synapses=args.binary)
     results_path = args.home + args.weights_path
 
-    saved_latent_weights = torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt'))
+    # saved_latent_weights = torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt'))
 
-    for old_latent_param, new_latent_param in zip(optimizer.param_groups[0]['latent'],
-                                                  saved_latent_weights['state']['latent']):
-        old_latent_param.data = new_latent_param
+    # for old_latent_param, new_latent_param in zip(optimizer.param_groups[0]['latent'],
+    #                                               saved_latent_weights['state']['latent']):
+    #     old_latent_param.data = new_latent_param
 
+    optimizer.load_state_dict(torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt')))
     print(optimizer.param_groups[0]['latent'])
     _, test_dl = create_dataloader(dataset_path,
                                    batch_size=args.batch_size,
