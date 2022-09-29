@@ -117,7 +117,7 @@ if __name__ == '__main__':
                                         optimizer, train_iterator,
                                         device, args.binary)
 
-            if (epoch + 1) % args.testiod == 0:
+            if (epoch + 1) % args.test_period == 0:
                 # Get mode/ensemble/committee test acc on the current task
                 test_acc_mode, test_preds_mode, \
                 test_acc_ens, test_preds_ens, \
@@ -155,5 +155,9 @@ if __name__ == '__main__':
                     results_path +'/test_preds_committee_ite_%d.npy'
                     % ite, test_preds_comm.detach().numpy())
                 np.save(
-                    results_path + '/true_labels_test_te_%d.npy'
+                    results_path + '/true_labels_test_ite_%d.npy'
                     % ite, true_labels_test.detach().numpy())
+
+                print(optimizer.state_dict())
+                torch.save(optimizer.state_dict(),
+                           results_path + '/optim_state_dict_ite_%d.pt')
