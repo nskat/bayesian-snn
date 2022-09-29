@@ -87,7 +87,7 @@ if __name__ == '__main__':
         acc_best = 0
         input_shape = 2 * 26 * 26
         net = Network(input_shape=input_shape,
-                      hidden_shape=[256, 256],
+                      hidden_shape=[1024, 512, 256],
                       output_shape=10,
                       scale_grad=args.scale_grad,
                       thr=args.thr,
@@ -117,7 +117,7 @@ if __name__ == '__main__':
                                         optimizer, train_iterator,
                                         device, args.binary)
             torch.cuda.empty_cache()
-            
+
             if (epoch + 1) % args.test_period == 0:
                 # Get mode/ensemble/committee test acc on the current task
                 test_acc_mode, test_preds_mode, \
