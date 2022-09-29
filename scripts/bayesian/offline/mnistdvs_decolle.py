@@ -135,18 +135,18 @@ if __name__ == '__main__':
                 print('committee acc at epoch %d for current task: %f' % (
                     epoch + 1, test_acc_comm))
 
-                ece_ens = compute_ece(test_preds_ens, 20,
-                                      true_labels_test
-                                      )
-                ece_comm = compute_ece(test_preds_comm, 20,
-                                       true_labels_test
-                                       )
+                test_ece_ens = compute_ece(test_preds_ens, 20,
+                                           true_labels_test
+                                           )
+                test_ece_comm = compute_ece(test_preds_comm, 20,
+                                            true_labels_test
+                                            )
 
                 accs_mode.append(test_acc_mode)
                 accs_ens.append(test_acc_ens)
                 accs_comm.append(test_acc_comm)
-                ece_ens.append(ece_ens)
-                ece_comm.append(ece_comm)
+                ece_ens.append(test_ece_ens)
+                ece_comm.append(test_ece_comm)
 
                 np.save(
                     results_path + '/test_preds_ensemble_ite_%d.npy'
