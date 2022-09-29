@@ -36,7 +36,7 @@ class Network(torch.nn.Module):
         for i in range(len(hidden_shape)-1):
             self.blocks.append(slayer.block.cuba.Dense(
                 neuron_params_drop, hidden_shape[i], hidden_shape[i+1],
-                weight_norm=False, weight_scale=weight_scale, bias=bias))
+                weight_norm=False, weight_scale=weight_scale))
             readout = torch.nn.Linear(hidden_shape[i+1],
                                       output_shape,
                                       bias=False)
