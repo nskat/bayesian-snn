@@ -67,9 +67,6 @@ if __name__ == '__main__':
     else:
         synapses = 'real_valued'
 
-    with open(results_path + '/commandline_args.txt', 'w') as f:
-        f.write('\n'.join(sys.argv[1:]))
-
     # Create dataloaders
     digits = [i for i in range(10)]
 
