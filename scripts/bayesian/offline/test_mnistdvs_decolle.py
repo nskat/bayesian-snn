@@ -95,7 +95,7 @@ if __name__ == '__main__':
         param[:] = 0
     optimizer.load_state_dict(torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt')))
 
-    print(optimizer.param_groups['latent'])
+    print(optimizer.param_groups[0]['latent'])
     _, test_dl = create_dataloader(dataset_path,
                                    batch_size=args.batch_size,
                                    size=[input_shape],
