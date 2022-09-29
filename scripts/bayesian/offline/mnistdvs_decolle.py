@@ -158,6 +158,5 @@ if __name__ == '__main__':
                     results_path + '/true_labels_test_ite_%d.npy'
                     % ite, true_labels_test.detach().numpy())
 
-                print(optimizer.state_dict())
                 torch.save(optimizer.state_dict(),
                            results_path + '/optim_state_dict_ite_%d.pt')
