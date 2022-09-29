@@ -19,9 +19,6 @@ def train_epoch_bayesian(network, loss_fn, optimizer, train_iter, device,
             loss = loss_fn(readouts, voltages, label)
             loss.backward()
 
-            if not binary:
-                SampleGradEngine.compute_samplegrad(network,
-                                                    loss_type=reduction)
             optimizer.step()
             optimizer.zero_grad()
 
@@ -29,10 +26,6 @@ def train_epoch_bayesian(network, loss_fn, optimizer, train_iter, device,
             del spikes
             del readouts
             del voltages
-
-            if not binary:
-                SampleGradEngine.clear_backprops(network)
-                SampleGradEngine.zero_sample_grad(network)
 
         del inputs
         torch.cuda.empty_cache()

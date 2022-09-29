@@ -115,33 +115,4 @@ if __name__ == '__main__':
                                      optimizer, train_iterator,
                                      device, args.binary)
 
-                if (epoch + 1) % args.test_period == 0:
-                    # Get mode/ensemble/committee test acc on the current task
-                    test_acc_mode, test_preds_mode, \
-                    test_acc_ens, test_preds_ens, \
-                    test_acc_comm, test_preds_comm, \
-                    true_labels_test \
-                        = test_bayesian(net, test_dl,
-                                        args.num_samples_test,
-                                        optimizer, device)
-                    print('Mode acc at epoch %d for current task: %f'
-                          % (epoch + 1, test_acc_mode))
-
-                    print('ensemble acc at epoch %d for current task: %f' % (
-                        epoch + 1, test_acc_ens))
-
-                    print('committee acc at epoch %d for current task: %f' % (
-                        epoch + 1, test_acc_comm))
-
-                    test_ece_ens = compute_ece(test_preds_ens, 20,
-                                               true_labels_test
-                                               )
-                    test_ece_comm = compute_ece(test_preds_comm, 20,
-                                                true_labels_test
-                                                )
-
-                    accs_mode.append(test_acc_mode)
-                    accs_ens.append(test_acc_ens)
-                    accs_comm.append(test_acc_comm)
-                    ece_ens.append(test_ece_ens)
-                    ece_comm.append(test_ece_comm)
+    print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))

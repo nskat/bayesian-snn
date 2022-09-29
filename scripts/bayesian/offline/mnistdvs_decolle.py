@@ -93,7 +93,6 @@ if __name__ == '__main__':
                       thr=args.thr,
                       burn_in=args.burn_in,
                       thr_scaling=args.binary).to(device)
-        SampleGradEngine.add_hooks(net)
 
         optimizer = get_optimizer(net, args, device,
                                   binary_synapses=args.binary)
