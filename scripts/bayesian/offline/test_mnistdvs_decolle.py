@@ -20,16 +20,16 @@ if __name__ == '__main__':
     parser.add_argument('--home', default=r"\users\home", type=str)
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--test_period', type=int, default=10)
-    parser.add_argument('--num_ite', default=1, type=int)
+    parser.add_argument('--num_ite', default=3, type=int)
     parser.add_argument('--lr', default=0.1, type=float)
     parser.add_argument('--reg', default=0., type=float)
     parser.add_argument('--thr', default=1.25, type=float)
-    parser.add_argument('--scale_grad', type=int, default=1000000)
+    parser.add_argument('--scale_grad', type=int, default=3)
     parser.add_argument('--num_epochs', type=int, default=100)
-    parser.add_argument('--dt', type=int, default=25000)
+    parser.add_argument('--dt', type=int, default=50000)
 
     parser.add_argument('--num_samples_test', default=10, type=int)
-    parser.add_argument('--rho', type=float, default=0.000001)
+    parser.add_argument('--rho', type=float, default=0.0000001)
     parser.add_argument('--burn_in', type=int, default=10)
 
     parser.add_argument('--fixed_prec', action='store_true', default=False)
@@ -38,7 +38,7 @@ if __name__ == '__main__':
     parser.add_argument('--prior_s', default=1., type=float)
 
     parser.add_argument('--binary', action='store_true', default=False)
-    parser.add_argument('--tau', default=0.01, type=float)
+    parser.add_argument('--tau', default=0.001, type=float)
     parser.add_argument('--prior', default=0.5, type=float)
 
     parser.add_argument('--device', type=int, default=None)
@@ -64,13 +64,6 @@ if __name__ == '__main__':
         synapses = 'binary'
     else:
         synapses = 'real_valued'
-
-    results_path = make_experiment_dir(args.home + '/results',
-                                       'mnistdvs_bayesian_decolle_nepochs_%d_'
-                                       % args.num_epochs + synapses)
-
-    with open(results_path + '/commandline_args.txt', 'w') as f:
-        f.write('\n'.join(sys.argv[1:]))
 
     # Create dataloaders
     digits = [i for i in range(10)]
