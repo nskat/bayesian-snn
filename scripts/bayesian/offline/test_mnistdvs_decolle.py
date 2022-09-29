@@ -89,7 +89,7 @@ if __name__ == '__main__':
                               binary_synapses=args.binary)
     results_path = args.home + args.weights_path
 
-    optimizer.load_state_dict(results_path + r'\optim_state_dict_ite_1.pt')
+    optimizer.load_state_dict(torch.load(results_path + r'\optim_state_dict_ite_1.pt'))
 
     _, test_dl = create_dataloader(dataset_path,
                                    batch_size=args.batch_size,

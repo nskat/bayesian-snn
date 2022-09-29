@@ -29,7 +29,6 @@ class BayesOptimizer(torch.optim.Optimizer):
         state_dict = deepcopy(state_dict)
         # Validate the state_dict
         groups = self.param_groups
-        print(state_dict)
         saved_groups = state_dict['param_groups']
 
         if len(groups) != len(saved_groups):
