@@ -156,6 +156,8 @@ if __name__ == '__main__':
                     results_path + '/true_labels_test_ite_%d.npy'
                     % ite, true_labels_test.detach().numpy())
 
+                optimizer.update_weights(howto='latent')
                 print([torch.mean(latent_tensor) for latent_tensor in optimizer.param_groups[0]['latent']])
-                torch.save(optimizer.state_dict(),
-                           results_path + '/optim_state_dict.pt')
+                print([torch.mean(w) for w in net.parameters() if w.requires_grad])
+                torch.save(net.state_dict(),
+                           results_path + '/latent_state_dict.pt')

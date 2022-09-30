@@ -48,8 +48,8 @@ class BayesBiSNN(BayesOptimizer):
         `mode`: weights are computed using the most probable state
         `rand`: weights are randomly generated
         """
-        assert howto in ['train', 'mode', 'rand'], 'mode should be one of' \
-                                                 '`train`, `MAP` or `rand`'
+        assert howto in ['train', 'mode', 'rand', 'latent'], 'mode should be one of' \
+                                                 '`train`, `MAP`, `rand` or `latent`'
 
         for group in self.param_groups:
             tau = group['tau']
@@ -67,8 +67,9 @@ class BayesBiSNN(BayesOptimizer):
                 elif howto == 'rand':
                     w_b.data = \
                         2 * torch.bernoulli(torch.sigmoid(2 * w_r.data)) - 1
-                # print(torch.mean(w_b), torch.mean(w_r))
-                # print('/////////////////////////////////////')
+                elif howto == 'latent':
+                    w_b.data = w_r.data
+
     def update_priors(self):
         for group in self.param_groups:
             for latent_param, prior in zip(group['latent'], group['priors_latent']):
