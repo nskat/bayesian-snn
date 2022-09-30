@@ -189,8 +189,9 @@ class BayesOptimizer(torch.optim.Optimizer):
 
         # Update parameter groups, setting their 'params' value
         def update_group(group, new_group):
-            print(new_group['params'], group['params'])
+            print(new_group['params'])
             print('///////')
+            print(group['params'])
             new_group['params'] = group['params']
             return new_group
         param_groups = [
