@@ -56,6 +56,7 @@ class BayesBiSNN(BayesOptimizer):
 
             params = [w_b for w_b in group['params'] if w_b.requires_grad]
             for w_b, w_r in zip(params, group['latent']):
+                print(torch.mean(w_r))
                 if howto == 'train':
                     epsilon = torch.rand(w_r.data.shape, device=w_r.device)
                     delta = torch.log(epsilon / (1 - epsilon)) / 2
