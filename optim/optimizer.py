@@ -187,9 +187,10 @@ class BayesOptimizer(torch.optim.Optimizer):
             else:
                 state[k] = v
 
+        # Update parameter groups, setting their 'params' value
         def update_group(group, new_group):
-            for i, param in enumerate(new_group['params']):
-                param = group['params'][i]
+            print(new_group['params'], group['params'])
+            new_group['params'] = group['params']
             return new_group
         param_groups = [
             update_group(g, ng) for g, ng in zip(groups, saved_groups)]
