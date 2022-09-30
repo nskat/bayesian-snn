@@ -94,6 +94,8 @@ if __name__ == '__main__':
     results_path = args.home + args.weights_path
 
     loaded_dict = torch.load(os.path.join(results_path, r'optim_state_dict.pt'))
+    print([torch.mean(latent_tensor) for latent_tensor in loaded_dict['param_groups'][0]['latent']])
+
     optimizer.load_state_dict(torch.load(os.path.join(results_path, r'optim_state_dict.pt')))
     print([torch.mean(latent_tensor) for latent_tensor in loaded_dict['param_groups'][0]['latent']])
     print([torch.mean(latent_tensor) for latent_tensor in optimizer.param_groups[0]['latent']])
