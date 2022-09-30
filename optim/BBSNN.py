@@ -56,7 +56,7 @@ class BayesBiSNN(BayesOptimizer):
 
             params = [w_b for w_b in group['params'] if w_b.requires_grad]
             for w_b, w_r in zip(params, group['latent']):
-                print(torch.mean(w_b), torch.mean(w_r))
+                # print(torch.mean(w_b), torch.mean(w_r))
                 if howto == 'train':
                     epsilon = torch.rand(w_r.data.shape, device=w_r.device)
                     delta = torch.log(epsilon / (1 - epsilon)) / 2
@@ -67,8 +67,8 @@ class BayesBiSNN(BayesOptimizer):
                 elif howto == 'rand':
                     w_b.data = \
                         2 * torch.bernoulli(torch.sigmoid(2 * w_r.data)) - 1
-                print(torch.mean(w_b), torch.mean(w_r))
-                print('/////////////////////////////////////')
+                # print(torch.mean(w_b), torch.mean(w_r))
+                # print('/////////////////////////////////////')
     def update_priors(self):
         for group in self.param_groups:
             for latent_param, prior in zip(group['latent'], group['priors_latent']):
