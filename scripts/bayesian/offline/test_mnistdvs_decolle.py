@@ -94,7 +94,7 @@ if __name__ == '__main__':
     saved_latent_weights = torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt'))
     for old_latent_param, new_latent_param in zip(optimizer.param_groups[0]['latent'],
                                                   saved_latent_weights['param_groups'][0]['latent']):
-        old_latent_param.data = new_latent_param
+        old_latent_param.data[:] = new_latent_param.data
 
     # optimizer.load_state_dict(torch.load(os.path.join(results_path, r'optim_state_dict_ite_%d.pt')))
     # print([torch.mean(latent_tensor) for latent_tensor in optimizer.param_groups[0]['latent']])
