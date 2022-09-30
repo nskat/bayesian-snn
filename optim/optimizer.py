@@ -202,4 +202,5 @@ class BayesOptimizer(torch.optim.Optimizer):
             return new_group
         param_groups = [
             update_group(g, ng) for g, ng in zip(groups, saved_groups)]
+        print([torch.mean(w) for w in param_groups[0]['latent']])
         self.__setstate__({'state': state, 'param_groups': param_groups})
