@@ -192,6 +192,7 @@ class BayesOptimizer(torch.optim.Optimizer):
             new_group['params'] = group['params']
             for k, v in new_group.items():
                 if (k != 'params') and hasattr(new_group[k], 'len'):
+                    print(k)
                     for (new_params, old_params) in zip(new_group[k], group[k]):
                         if isinstance(new_params[0], torch.Tensor):
                             for new_param, old_param in zip(new_params, old_params):
