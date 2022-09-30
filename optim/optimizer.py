@@ -191,8 +191,13 @@ class BayesOptimizer(torch.optim.Optimizer):
         def update_group(group, new_group):
             new_group['params'] = group['params']
             for k, v in new_group.items():
-                if k != 'params' and isinstance(new_group[k], torch.Tensor):
-                    new_group[k].to_(group[k].device)
+                if k != 'params':
+                    for (new_params, old_params) in zip(new_group[k], group[k]):
+                        if isinstance(new_params[0], torch.Tensor):
+                            for new_param, old_param  in zip(new_params, old_params):
+                                new_param.to_(old_param.device)
+                        
+            new_group[k] = new_group[k].to(group[k].device)
             return new_group
         param_groups = [
             update_group(g, ng) for g, ng in zip(groups, saved_groups)]
