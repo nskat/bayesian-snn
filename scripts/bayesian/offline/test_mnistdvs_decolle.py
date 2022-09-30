@@ -89,6 +89,8 @@ if __name__ == '__main__':
 
     optimizer = get_optimizer(net, args, device,
                               binary_synapses=args.binary)
+    print([torch.mean(latent_tensor) for latent_tensor in optimizer.param_groups[0]['latent']])
+
     results_path = args.home + args.weights_path
 
     loaded_dict = torch.load(os.path.join(results_path, r'optim_state_dict.pt'))
