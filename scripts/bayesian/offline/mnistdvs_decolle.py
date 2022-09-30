@@ -145,6 +145,7 @@ if __name__ == '__main__':
                 ece_ens.append(test_ece_ens)
                 ece_comm.append(test_ece_comm)
 
+
                 np.save(
                     results_path + '/test_preds_ensemble_ite_%d.npy'
                     % ite, test_preds_ens.detach().numpy())
@@ -155,5 +156,6 @@ if __name__ == '__main__':
                     results_path + '/true_labels_test_ite_%d.npy'
                     % ite, true_labels_test.detach().numpy())
 
+                print([torch.mean(latent_tensor) for latent_tensor in optimizer.param_groups[0]['latent']])
                 torch.save(optimizer.state_dict(),
-                           results_path + '/optim_state_dict_ite_%d.pt')
+                           results_path + '/optim_state_dict.pt')
