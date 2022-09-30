@@ -48,6 +48,7 @@ def test_mode(net, optimizer, test_dl, device):
     predictions = torch.Tensor()
     test_loader = iter(test_dl)
     true_labels = torch.FloatTensor()
+    print([torch.mean(w) for w in net.parameters() if w.requires_grad])
 
     for inputs, label in tqdm.tqdm(test_loader):
         net.reset_()
