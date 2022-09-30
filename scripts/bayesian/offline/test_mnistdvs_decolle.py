@@ -88,7 +88,6 @@ if __name__ == '__main__':
     results_path = args.home + args.weights_path
     net.load_state_dict(torch.load(os.path.join(results_path, r'latent_state_dict.pt')))
 
-    print([torch.mean(w) for w in net.parameters()])
     optimizer = get_optimizer(net, args, device,
                               binary_synapses=args.binary)
 
