@@ -2,10 +2,10 @@ from optim.BBSNN import BayesBiSNN
 from optim.GaussianBayesSNN import GaussianBayesOptimizer
 
 
-def get_optimizer(network, args, device, binary_synapses=False):
+def get_optimizer(network, args, device, binary_synapses=False, initial_params=None):
     if binary_synapses:
         optimizer = BayesBiSNN(network.parameters(),
-                               initial_latent_params=None,
+                               initial_latent_params=initial_params,
                                prior=args.prior,
                                lr=args.lr,
                                rho=args.rho,
@@ -14,7 +14,7 @@ def get_optimizer(network, args, device, binary_synapses=False):
     else:
         optimizer \
             = GaussianBayesOptimizer(network.parameters(),
-                                     initial_params_mean=None,
+                                     initial_params_mean=initial_params,
                                      initial_params_prec=args.initial_prec,
                                      prior_m=args.prior_m,
                                      prior_s=args.prior_s,
