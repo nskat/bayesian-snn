@@ -62,6 +62,8 @@ def test_mode(net, optimizer, test_dl, device):
         predictions = torch.cat((predictions, preds))
         torch.cuda.empty_cache()
 
+    print(predictions.argmax(-1))
+    print(true_labels)
     acc = torch.mean((predictions.argmax(-1) == true_labels).type(torch.float))
     print('Spike rates: ', [torch.mean(spike) for spike in spikes])
     return acc, predictions, true_labels
