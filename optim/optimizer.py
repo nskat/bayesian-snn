@@ -181,21 +181,18 @@ class BayesOptimizer(torch.optim.Optimizer):
         # backward compatibility).
         state = defaultdict(dict)
         for k, v in state_dict['state'].items():
+            print(k)
             if k in id_map:
                 param = id_map[k]
                 state[param] = cast(param, v)
             else:
                 state[k] = v
 
-        for group in saved_groups:
-            print(group)
-            print('///////')
         # Update parameter groups, setting their 'params' value
         def update_group(group, new_group):
-            # print(new_group['params'])
-            # print('///////')
-            # print(group['params'])
             new_group['params'] = group['params']
+            # for k, v in new_group.items():
+            #     new_group[k] = group[k]
             return new_group
         param_groups = [
             update_group(g, ng) for g, ng in zip(groups, saved_groups)]
