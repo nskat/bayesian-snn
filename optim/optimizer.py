@@ -51,7 +51,7 @@ class BayesOptimizer(torch.optim.Optimizer):
                 # Floating-point types are a bit special here. They are the only ones
                 # that are assumed to always match the type of params.
                 if param.is_floating_point():
-                    value = value.to(param.dtype)x
+                    value = value.to(param.dtype)
                 value = value.to(param.device)
                 return value
             elif isinstance(value, dict):
